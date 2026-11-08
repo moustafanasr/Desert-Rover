@@ -85,3 +85,6 @@ git push
 - Font loading via Google Fonts (falls back to installed system fonts if unavailable).
 
 **Design and media note:** The website has been reconstructed from the provided concept, not produced by cropping an entire design image into a non-functional page. `design-reference.png` is provided for comparison only and is not displayed as a site section.
+
+### Spacing refinement (November 2026)
+Vertical whitespace between page sections has been reduced moderately across desktop and mobile. The theme design, typography, images, animation, and booking preview remain unchanged. The modifications are in `assets/css/style.css`.
