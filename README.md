@@ -19,7 +19,7 @@ A polished, responsive, static presentation website **inspired by the attached r
 
 ## Languages
 
-English (default), German, and Arabic. Language choice is stored in localStorage and Arabic automatically enables RTL. Switch languages using the header control.
+11 languages: English (default), German, Arabic, Russian, French, Polish, Czech, Finnish, Danish, Swedish and Norwegian Bokmål. The header has a compact accessible 11-language selector; the selected language is saved in `localStorage`, persists across all pages, and Arabic automatically enables RTL. Eight additional locale packs translate the 222 main UI strings, 35 supplemental strings, tour details, and included activities. Inspect `assets/locales/*.json` to review and improve content; runtime data is in `assets/js/i18n-extra.js`. All content and checkout copy should receive professional native-speaker proofreading before production use.
 
 ## How to preview locally
 
@@ -62,7 +62,7 @@ git push
 - Tour adult/listed prices and inclusion lists were updated from the operator brief dated November 22, 2026. Child and infant fares, some tour durations, transfer interpretation, Cairo/Luxor prices, availability and all review examples still require confirmation. No real payment takes place.
 - Guest image permissions (especially photos involving children) should be confirmed with the owner before public publishing.
 - All forms are **demonstrations** that save information to this browser's `localStorage` only. Do not enter sensitive or real customer data in demo forms.
-- The languages are implemented for the demo's major UI/copy; any new content needs professionally verified translations.
+- The 8 new languages cover the existing UI, tour titles/descriptions, activity inclusions, FAQ, and booking notices. A native-speaker review is recommended before production deployment, and any future text must be translated in all locales.
 - Public GitHub repositories expose included images and code to anyone. Obtain consent before publishing any guest photos and use a private/staging option where appropriate.
 - Review the site's actual service categories, contact details, booking terms, and company name with the client.
 
@@ -91,3 +91,6 @@ Vertical whitespace between page sections has been reduced moderately across des
 
 ### Client-requested commercial update (22 Nov 2026)
 13 tour/quote options, verified old and new adult prices, auto-calculated discount badges, time-of-day, adult/child/infant counters and age restrictions, optional transfer by location, special Sunrise group transfer pricing, correct speedboat capacity, official client logo and additional photo assets. Refer to `CLIENT_UPDATES_2026-11-22_AR.md` for the detailed price table and operator confirmations still outstanding.
+
+### Multilingual update (22 Nov 2026)
+Added Russian, French, Polish, Czech, Finnish, Danish, Swedish and Norwegian Bokmål to the original English, German and Arabic. The translations are packaged into 8 JSON files plus a static runtime bundle and are available on all 12 pages. This is a client preview with one shared path per page and runtime language switching; production multilingual SEO should use locale-specific URLs and metadata in WordPress.
