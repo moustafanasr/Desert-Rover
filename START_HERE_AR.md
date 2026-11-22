@@ -5,7 +5,7 @@
 ## تشغيل المشروع على جهازك
 
 1. فك ضغط الملف ZIP.
-2. افتح فولدر `desert-rover-preview`.
+2. افتح الفولدر اللي فكّيت فيه ملف ZIP ويحتوي على `index.html`.
 3. افتح `index.html` في المتصفح، أو الأفضل تشغله من Terminal بالأمر:
 
 ```bash
@@ -16,24 +16,24 @@ python -m http.server 8000
 
 ## رفع المشروع على GitHub
 
-اعمل Repository جديد على GitHub باسم `desert-rover-demo`، وبعدها من داخل فولدر المشروع نفذ:
+الـRepository موجود بالفعل على GitHub؛ ارفع الملفات المعدلة في نفس الـRepository. لو بتبدأ Git على جهاز جديد نفّذ:
 
 ```bash
 git init
 git add .
 git commit -m "Desert Rover client preview"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/desert-rover-demo.git
+git remote add origin https://github.com/moustafanasr/Desert-Rover.git
 git push -u origin main
 ```
 
-بدّل `YOUR_USERNAME` باسم حساب GitHub بتاعك. لو الـRepository موجود بالفعل ومتربط بمشروع، راجع إعداد الـremote قبل ما تنفذ أمر إضافته.
+لو المشروع موجود ومتربط بالـRepository عندك بالفعل، ما تنفّذش git init أو remote add origin مرة ثانية؛ استبدل الملفات ثم نفّذ git add . وبعدها git commit و git push.
 
 بعد الرفع افتح **Settings → Pages** واختار **Deploy from a branch** ثم **main** و **/(root)** واضغط **Save**.
 
 رابط الموقع بعد النشر هيبقى بالشكل ده:
 
-`https://YOUR_USERNAME.github.io/desert-rover-demo/`
+`https://moustafanasr.github.io/Desert-Rover/`
 
 ## تعديل الموقع
 
@@ -46,7 +46,7 @@ git push -u origin main
 ## ملاحظات أساسية
 
 - اللغات الموجودة: English / Deutsch / العربية.
-- الأسعار والتقييمات والبرامج في الـDemo للتوضيح فقط؛ لازم تتأكد من معلومات العميل قبل استخدامها بشكل تجاري.
+- الأسعار القديمة والجديدة للرحلات المحددة اتضافت من بيانات العميل، لكن أسعار الأطفال والرضع ورسوم الترانسفير ووحدات تسعير بعض الأنشطة ما زالت محتاجة تأكيد. القاهرة والأقصر لا توجد أسعار مؤكدة ليهما. التقييمات في الـDemo أمثلة شكلية.
 - الحجز الحالي بيعرض تجربة الحجز وبيحفظ بيانات تجريبية في متصفحك **فقط**. مفيش بوابة دفع أو إيميلات أو نظام توافر حقيقي.
 - التأكد من موافقات تصوير واستخدام صور العملاء — وبالأخص صور الأطفال — قبل رفعها على Repository عام.
 - بعد موافقة العميل على التصميم، نحول المكونات لقالب WordPress Custom Theme ونوصلها بـWooCommerce والـBooking Engine وبوابة الدفع، ونبني لوحة الإدارة لتعديل الرحلات والأسعار والتواريخ والترجمة.

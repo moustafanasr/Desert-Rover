@@ -6,7 +6,7 @@ A polished, responsive, static presentation website **inspired by the attached r
 
 - `index.html` — full homepage with loader, cinematic hero, experiences, story, private/family sections, photo gallery, sample reviews, process, FAQ and footer.
 - `experiences.html` — searchable and filterable experiences listing, sorting, favorites.
-- `experience.html?tour=sea-horse` — individual tour detail, gallery/lightbox, guest count, date selection, dynamic price preview.
+- `experience.html?tour=quad-safari-2h` — individual tour detail, gallery/lightbox, guest count, date selection, dynamic price preview.
 - `private.html` — tailor-made private-tour inquiry form (local demo only).
 - `families.html` — family-friendly experiences.
 - `about.html` — brand story and photo wall.
@@ -33,20 +33,20 @@ Then visit `http://localhost:8000/`.
 
 ## Upload to GitHub & publish on GitHub Pages
 
-Create an empty public/private GitHub repository (e.g., `desert-rover-demo`), then open a terminal **inside this unzipped folder**:
+Use your existing repository `moustafanasr/Desert-Rover`, then open a terminal **inside this unzipped folder**:
 
 ```bash
 git init
 git add .
 git commit -m "Initial Desert Rover frontend demo"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/desert-rover-demo.git
+git remote add origin https://github.com/moustafanasr/Desert-Rover.git
 git push -u origin main
 ```
 
 In the repository: **Settings → Pages → Build and deployment → Deploy from a branch → main / (root) → Save**.
 
-The preview will be at `https://YOUR_USERNAME.github.io/desert-rover-demo/` after GitHub Pages deploys it. All asset URLs are relative, so it works from a project subpath.
+The preview will be at `https://moustafanasr.github.io/Desert-Rover/` after GitHub Pages deploys it. All asset URLs are relative, so it works from a project subpath.
 
 For future updates:
 
@@ -59,7 +59,7 @@ git push
 ## Important: this is a visual demo, not a production booking system
 
 - **No real payments, booking confirmations, availability management, emails, SMS, or operator notifications** are performed.
-- All prices, durations, sample reviews and booking examples are *illustrative placeholders*; replace them with confirmed operator information before launch.
+- Tour adult/listed prices and inclusion lists were updated from the operator brief dated November 22, 2026. Child and infant fares, some tour durations, transfer interpretation, Cairo/Luxor prices, availability and all review examples still require confirmation. No real payment takes place.
 - Guest image permissions (especially photos involving children) should be confirmed with the owner before public publishing.
 - All forms are **demonstrations** that save information to this browser's `localStorage` only. Do not enter sensitive or real customer data in demo forms.
 - The languages are implemented for the demo's major UI/copy; any new content needs professionally verified translations.
@@ -74,7 +74,7 @@ git push
 4. Integrate WooCommerce payment with an approved live gateway, after confirming currency, policies, and payment status behavior. Only paid and confirmed bookings should allocate real resources.
 5. Configure multilingual content with WPML / Polylang or another tested approach; validate checkout translation, RTL and multi-currency compatibility.
 6. Add secure email/SMS/WhatsApp confirmations, back-office management, data privacy notices and production anti-spam/security measures.
-7. Replace demo testimonials and prices with verified content, test full booking/cancellation/refund flow and launch on suitable managed WordPress hosting.
+7. Replace demo testimonials, confirm remaining prices and transfer conditions, test full booking/cancellation/refund flow and launch on suitable managed WordPress hosting.
 
 ## Design and technologies
 
@@ -88,3 +88,6 @@ git push
 
 ### Spacing refinement (November 2026)
 Vertical whitespace between page sections has been reduced moderately across desktop and mobile. The theme design, typography, images, animation, and booking preview remain unchanged. The modifications are in `assets/css/style.css`.
+
+### Client-requested commercial update (22 Nov 2026)
+13 tour/quote options, verified old and new adult prices, auto-calculated discount badges, time-of-day, adult/child/infant counters and age restrictions, optional transfer by location, special Sunrise group transfer pricing, correct speedboat capacity, official client logo and additional photo assets. Refer to `CLIENT_UPDATES_2026-11-22_AR.md` for the detailed price table and operator confirmations still outstanding.

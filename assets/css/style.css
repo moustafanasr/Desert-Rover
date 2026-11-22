@@ -11,3 +11,44 @@
 .loader-track i{animation:dr-loader-progress .85s ease-out forwards}.gsap-active .loader-track i{animation:none}
 
 /* Compact vertical rhythm update (Nov 2026): reduced space between sections without changing typography or imagery. */
+
+/* Desert Rover client-requested update, 22 Nov 2026 */
+.brand-picture{width:116px;min-width:116px;height:calc(var(--header-h) - 6px);display:flex;align-items:center;justify-content:center}
+.brand-picture img{width:115px;height:115px;object-fit:contain;max-width:none;filter:drop-shadow(0 2px 5px rgba(0,0,0,.18))}
+.footer .brand-picture{width:150px;height:110px}.footer .brand-picture img{width:148px;height:148px}
+.loader-logo{height:112px;width:112px;object-fit:contain;display:block;margin:0 auto 6px;filter:drop-shadow(0 8px 14px rgba(0,0,0,.26))}
+.loader-core .loader-logo{max-width:112px}
+.actual-offers-section{background:#fbf5eb;padding-top:58px;padding-bottom:58px}
+.actual-offers-section .section-heading{margin-bottom:26px}
+.offers-actions{display:flex;justify-content:center;margin-top:24px}
+.price-comparison{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.price-comparison del{font-size:13px;color:#99918b;text-decoration-thickness:1.5px}
+.tour-card-bottom .price-comparison{display:flex;gap:4px 8px;flex-wrap:wrap}
+.tour-card-bottom .price-comparison strong{font-size:22px;color:#a67326}
+.tour-card-bottom .price-comparison small{font-size:10px}
+.discount-chip{position:absolute;bottom:10px;left:12px;background:#f4b733;color:#271a0b;padding:6px 10px;border-radius:7px;font-weight:900;font-size:12px;box-shadow:0 4px 11px #0004}
+.tour-card .tour-chip{max-width:calc(100% - 74px)}
+.tour-card-body p{line-height:1.65;min-height:3.15em}
+.quote-price{font-size:13px;color:#8d6224}
+.booking-price.revised{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.booking-price.revised del{font-size:20px;color:#abaaa8}
+.booking-price.revised small{width:100%}
+.savings-pill{display:inline-block;background:#fff1d1;color:#875b16;border:1px solid #eccc8b;border-radius:50px;padding:6px 12px;font-size:12px;font-weight:800}
+.booking-cost-line{display:flex;justify-content:space-between;gap:10px;color:#716457;font-size:12px}
+.booking-cost-line strong{color:#3f352d;font-size:14px}
+.detail-book-form label select{background:#fffefd;border:1px solid #e5dacc;border-radius:7px;padding:12px 13px;min-height:47px;color:#332b24;font-size:13px}
+.notice-warning,.notice-info{display:flex;align-items:start;gap:10px;padding:12px 14px;border-radius:9px;margin:16px 0 0;font-weight:600;font-size:12px;line-height:1.6}
+.notice-warning{border:1px solid #e4cda3;background:#fff5de;color:#83531e}
+.notice-info{border:1px solid #c9dedc;background:#f2faf7;color:#346b63}
+.notice-warning svg,.notice-info svg{flex-shrink:0;width:18px;height:18px}
+.discount-info{background:#f7e4b3;color:#825718;padding:5px 10px;border-radius:50px;font-weight:800}
+.checkout-summary .summary-row{gap:20px}.checkout-summary .summary-row strong{max-width:55%;text-align:end}
+@media(max-width:1050px){.brand-picture{width:99px;min-width:99px}.brand-picture img{width:100px;height:100px}.actual-offers-section .tour-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.brand-picture{width:80px;min-width:80px;height:var(--header-h)}.brand-picture img{width:87px;height:87px}.actual-offers-section{padding:40px 0}.actual-offers-section .tour-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.actual-offers-section .tour-image{height:143px}.actual-offers-section .tour-card-body{padding:12px}.actual-offers-section .tour-title{font-size:14px}.actual-offers-section .tour-meta{flex-wrap:wrap}.actual-offers-section .tour-card-bottom{align-items:end}.actual-offers-section .tour-card-bottom .price-comparison strong{font-size:18px}.booking-card{position:static}}
+@media(max-width:390px){.actual-offers-section .tour-grid{grid-template-columns:1fr}.actual-offers-section .tour-image{height:190px}}
+
+/* Final logo scale, keeps the announcement and navigation unobstructed */
+.site-header .brand-picture{height:var(--header-h);width:90px;min-width:90px}
+.site-header .brand-picture img{width:87px;height:87px}
+.footer .brand-picture img{width:110px;height:110px}
+@media(max-width:640px){.site-header .brand-picture{width:75px;min-width:75px}.site-header .brand-picture img{width:78px;height:78px}}
