@@ -253,3 +253,154 @@ main { display: block; overflow: clip; }
 @media (prefers-reduced-motion:reduce) {
  *,*::before,*::after { scroll-behavior:auto !important; }
 }
+
+
+/* ==========================================================================
+   Desert Rover | UI refinement 23 Nov 2026
+   Image composition, authentic guest moments, accessible 11-language picker
+   ========================================================================== */
+
+/* Private / family feature cards: prevent copy and imagery overlapping. */
+.promo-grid{align-items:stretch;gap:18px}
+.promo-card,.promo-card:nth-child(2){
+  display:grid;grid-template-columns:minmax(0,54%) minmax(0,46%);
+  height:auto;min-height:310px;align-items:stretch;
+  background:#f0e8dc;isolation:isolate;overflow:hidden;border-radius:16px;
+  border:1px solid rgba(98,71,44,.12);
+  box-shadow:0 12px 30px rgba(63,43,28,.06);
+}
+.promo-card:nth-child(2){background:#ecf1f0}
+.promo-card::before,.promo-card:nth-child(2)::before{display:none!important;content:none!important}
+.promo-card .promo-text{
+  z-index:6;position:relative;grid-column:1;grid-row:1;
+  width:100%!important;min-width:0;
+  padding:32px 20px 30px 32px!important;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+}
+.promo-card .promo-text>*{max-width:100%}
+.promo-card .eyebrow{font-size:10px;letter-spacing:.17em}
+.promo-card h3{font-size:clamp(31px,3vw,43px);line-height:1.04;margin:11px 0 11px;text-wrap:balance}
+.promo-card p{font-size:12.5px;line-height:1.65;max-width:320px;margin-bottom:17px;color:#625751}
+.promo-card .btn{max-width:100%;white-space:normal;text-align:center;justify-content:center}
+.promo-card img,.promo-card:nth-child(2) img{
+  position:relative;grid-column:2;grid-row:1;top:auto;bottom:auto;
+  right:auto;left:auto;width:100%!important;height:100%!important;
+  object-fit:cover;object-position:52% 43%;display:block;z-index:5;
+  border-radius:0;transform:none;transition:transform .55s ease;
+}
+.promo-card:nth-child(2) img{object-position:55% center}
+.promo-card:hover img{transform:scale(1.04)}
+html[dir="rtl"] .promo-card .promo-text{padding:30px 32px 30px 20px!important;align-items:flex-start}
+html[dir="rtl"] .promo-card img{right:auto;left:auto}
+
+/* Guest section is now built from genuine uploaded photos, not fabricated quotes. */
+.reviews-section{padding-block:54px 59px}
+.reviews-section .section-heading{margin-bottom:27px}
+.guest-moments-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.guest-moment-card{
+  min-width:0;height:315px;display:block;overflow:hidden;position:relative;
+  background:#d6c6b3;border-radius:16px;text-decoration:none;color:#fff;
+  box-shadow:0 12px 32px rgba(39,31,26,.09);
+}
+.guest-moment-card>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 42%;transition:transform .65s ease}
+.guest-moment-card:nth-child(2)>img{object-position:center 38%}
+.guest-moment-card:nth-child(3)>img{object-position:center 44%}
+.guest-moment-shade{pointer-events:none;position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(27,20,18,.13) 50%,rgba(27,20,18,.83) 100%)}
+.guest-moment-content{position:absolute;inset:auto 20px 20px;display:flex;flex-direction:column;gap:7px;align-items:flex-start;pointer-events:none}
+.guest-moment-category{font:700 10px/1.3 'DM Sans',Arial,sans-serif;text-transform:uppercase;letter-spacing:.11em;background:rgba(249,241,225,.94);color:#57402a;padding:7px 11px;border-radius:30px}
+.guest-moment-content strong{font-size:clamp(28px,2.5vw,37px);line-height:.98;font-weight:600;max-width:85%;text-wrap:balance}
+.guest-moment-arrow{position:absolute;right:0;bottom:0;display:grid;place-items:center;width:37px;height:37px;border-radius:50%;border:1px solid rgba(255,255,255,.64);background:rgba(255,255,255,.16)}
+.guest-moment-arrow svg{width:17px;height:17px}
+.guest-moment-card:hover>img{transform:scale(1.055)}
+.guest-moment-card:focus-visible{outline:3px solid #d7ab5c;outline-offset:4px}
+.guest-moments-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:19px;color:#827569;font-size:12px}
+.guest-moments-footer .text-link{font-weight:700}
+html[dir="rtl"] .guest-moment-arrow{left:0;right:auto}
+
+/* Custom language selector: replaces platform-native <select> popup. */
+.language-picker{position:relative;flex:none;z-index:120}
+.language-trigger{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  min-height:39px;padding:5px 12px;background:rgba(255,255,255,.045);
+  color:#f7efe4;border:1px solid rgba(229,194,141,.55);border-radius:30px;
+  font:700 11px/1.25 'DM Sans',Arial,sans-serif;white-space:nowrap;
+  cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.language-trigger:hover,.language-picker.is-open .language-trigger{background:rgba(215,171,92,.14);border-color:#dfb877}
+.language-trigger:focus-visible{outline:2px solid #e2bd7e;outline-offset:3px}
+.language-globe,.language-chevron{display:inline-grid;place-items:center;color:#deb978}
+.language-globe svg{width:16px;height:16px}
+.language-chevron svg{width:14px;height:14px;transition:transform .2s}
+.language-picker.is-open .language-chevron svg{transform:rotate(180deg)}
+.language-current{display:flex;gap:5px;align-items:center}
+.language-name{font-weight:500;color:#eae0d4}
+.language-menu{
+  position:absolute;z-index:200;top:calc(100% + 12px);right:0;
+  width:230px;max-width:calc(100vw - 24px);max-height:min(410px,75vh);
+  padding:8px;background:#fffaf4;color:#322922;overflow:auto;
+  border:1px solid #e5d8c8;border-radius:15px;
+  box-shadow:0 20px 54px rgba(20,16,14,.28);
+  scrollbar-color:#d1bb9b transparent;scrollbar-width:thin;
+}
+.language-menu[hidden]{display:none!important}
+.language-menu-title{margin:6px 8px 9px;padding:0 3px 10px;border-bottom:1px solid #ede2d6;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#98734c}
+.language-options{display:grid;gap:2px}
+.language-option{
+  display:grid;grid-template-columns:30px 1fr 18px;gap:10px;align-items:center;
+  width:100%;min-height:37px;padding:8px 10px;background:none;border:0;
+  color:#342b25;text-align:start;cursor:pointer;border-radius:8px;
+  font:600 12px/1.3 'DM Sans','Noto Sans',Arial,sans-serif;
+}
+.language-option:hover,.language-option:focus-visible{background:#f4e9da;outline:none}
+.language-option.is-active{background:#f8ecd5;color:#694417;font-weight:800}
+.language-code{font-size:10px;font-weight:800;color:#ad7e46}
+.language-check{display:grid;place-items:center;color:#a77531}
+.language-check svg{width:15px;height:15px}
+html[dir="rtl"] .language-menu{left:0;right:auto}
+html[dir="rtl"] .language-option{text-align:start}
+
+@media(max-width:1100px){
+  .promo-card .promo-text{padding:25px 17px 25px 23px!important}
+  .promo-card h3{font-size:clamp(29px,3.1vw,38px)}
+  .guest-moment-card{height:275px}
+}
+@media(max-width:780px){
+  .promo-grid{grid-template-columns:1fr;gap:14px}
+  .promo-card,.promo-card:nth-child(2){min-height:280px;grid-template-columns:minmax(0,53%) minmax(0,47%)}
+  .promo-card .promo-text{padding:24px!important}
+  .promo-card h3{font-size:clamp(30px,4.6vw,39px)}
+  .promo-card p{font-size:12px}
+  .guest-moments-grid{gap:11px}
+  .guest-moment-card{height:235px}
+  .guest-moment-content{inset:auto 13px 13px}
+  .guest-moment-content strong{font-size:27px}
+}
+@media(max-width:530px){
+  .promo-card,.promo-card:nth-child(2){
+    display:grid;grid-template-columns:1fr;grid-template-rows:auto 210px;
+    height:auto;min-height:0;align-items:stretch;border-radius:14px;
+  }
+  .promo-card .promo-text{grid-column:1;grid-row:1;padding:24px 23px 22px!important;align-items:flex-start}
+  .promo-card h3{font-size:35px;line-height:1.04;max-width:100%;margin:10px 0}
+  .promo-card p{font-size:12px;line-height:1.6;max-width:310px;margin-bottom:16px}
+  .promo-card img,.promo-card:nth-child(2) img{
+    grid-column:1;grid-row:2;position:relative;inset:auto;
+    width:100%!important;height:210px!important;object-fit:cover;
+    object-position:center 36%;
+  }
+  .promo-card:nth-child(2) img{object-position:center 41%}
+  html[dir="rtl"] .promo-card .promo-text{padding:24px 23px 22px!important}
+  .reviews-section{padding-block:40px 44px}
+  .guest-moments-grid{grid-template-columns:1fr;gap:14px}
+  .guest-moment-card{height:250px}
+  .guest-moment-content{inset:auto 18px 17px}
+  .guest-moment-content strong{font-size:34px}
+  .guest-moments-footer{font-size:11px;margin-top:17px}
+  .language-trigger{min-height:35px;padding:5px 8px;gap:5px;font-size:10px}
+  .language-name{display:none}
+  .language-globe svg{width:14px;height:14px}
+  .language-menu{width:205px;top:calc(100% + 9px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .guest-moment-card>img,.promo-card img,.language-chevron svg{transition:none!important}
+}
