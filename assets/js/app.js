@@ -138,6 +138,68 @@ function setupDetailBooking(){let a=2,c=0,i=0;const form=document.getElementById
 function setupCheckout(){document.getElementById('checkout-form')?.addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget;const values=Object.fromEntries(new FormData(form).entries());const b=window.drBooking;const ref='DR-DEMO-'+Date.now().toString(36).toUpperCase();const record={ref,tourId:b.id,date:b.date,adults:b.adults,children:b.children,infants:b.infants,infantAge:b.infantAge,slot:b.slot,pickup:b.pickup,base:b.base,transfer:b.transfer,total:b.total,guest:values,createdAt:new Date().toISOString(),status:'demo'};const all=loadBookings();all.push(record);localStorage.setItem('dr_bookings',JSON.stringify(all));location.href='confirmation.html?ref='+encodeURIComponent(ref)})}
 function setupDemoForm(id,key,message){document.getElementById(id)?.addEventListener('submit',e=>{e.preventDefault();let current=[];try{current=JSON.parse(localStorage.getItem(key)||'[]')}catch{};current.push({...Object.fromEntries(new FormData(e.currentTarget).entries()),createdAt:new Date().toISOString()});localStorage.setItem(key,JSON.stringify(current));showToast(message);e.currentTarget.reset()})}
 function mountIcons(){if(window.lucide?.createIcons){try{window.lucide.createIcons({attrs:{'stroke-width':1.7}})}catch(e){console.warn('Lucide icons unavailable:',e)}}}
-function startMotion(){const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;const loader=document.getElementById('loader');const hide=()=>{loader?.classList.add('loaded');setTimeout(()=>loader?.remove(),700)};if(window.gsap&&!reduce){document.body.classList.add('gsap-active');if(window.ScrollTrigger)window.gsap.registerPlugin(window.ScrollTrigger);const g=window.gsap;const wave=g.timeline({onComplete:hide});wave.from('.loader-core svg',{y:22,opacity:0,duration:.55}).from('.loader-core strong',{y:8,opacity:0,duration:.5},'-=.25').to('.loader-track i',{scaleX:1,transformOrigin:'left',duration:.7,ease:'power2.inOut'},'-=.15').to('#loader',{yPercent:-101,duration:.75,ease:'power3.inOut'},'+=.1');if(page==='home'){g.from('.hero-eyebrow',{y:12,opacity:0,duration:.8,delay:1.65});g.from('.hero-content h1 span',{y:58,opacity:0,stagger:.13,duration:1,ease:'power3.out',delay:1.78});g.from('.hero-tagline,.hero-content p,.hero-buttons',{y:22,opacity:0,stagger:.09,duration:.8,delay:2.05});g.to('.hero-photo',{scale:1.055,duration:20,ease:'sine.inOut',yoyo:true,repeat:-1});const slides=g.utils.toArray('.hero-photo');if(slides.length>1){const slider=g.timeline({repeat:-1,delay:5});slides.forEach((slide,i)=>{slider.to(slide,{opacity:0,duration:1.45,ease:'sine.inOut'},i===0?undefined:'+=5');slider.to(slides[(i+1)%slides.length],{opacity:1,duration:1.45,ease:'sine.inOut'},'<');});}g.from('.trust-item',{opacity:0,y:16,stagger:.11,duration:.7,ease:'power2.out',delay:2.3});}if(window.ScrollTrigger){g.utils.toArray('.reveal').forEach(el=>g.from(el,{scrollTrigger:{trigger:el,start:'top 94%',once:true},y:24,opacity:0,duration:.75,ease:'power2.out'}));g.utils.toArray('.tour-grid,.category-grid,.mini-gallery').forEach(group=>{const items=group.querySelectorAll('.tour-card,.category-card,.gallery-tile');if(items.length){g.from(items,{scrollTrigger:{trigger:group,start:'top 89%',once:true},y:18,opacity:0,stagger:.08,duration:.55,ease:'power2.out',overwrite:'auto'});}});g.to('.site-header',{scrollTrigger:{trigger:'main',start:'top -50',end:'bottom bottom',toggleClass:{targets:'#site-header',className:'scrolled'}}});}}else{setTimeout(hide,1000);const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target)}})},{threshold:.04});document.querySelectorAll('.reveal').forEach(n=>observer.observe(n));}window.setTimeout(()=>{if(document.getElementById('loader'))hide()},4200)}
+/* Resilient motion: never pre-hide below-the-fold content.
+   Old GSAP .from() with ScrollTrigger and duplicate grid tweens left
+   elements at opacity:0, reserving hundreds of blank pixels. */
+function startMotion(){
+ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const loader=document.getElementById('loader');
+ let loaderClosed=false;
+ const hide=()=>{
+   if(loaderClosed)return;loaderClosed=true;
+   loader?.classList.add('loaded');
+   loader?.setAttribute('aria-hidden','true');
+   window.setTimeout(()=>loader?.remove(),480);
+ };
+ // Every card and photo is visible by default regardless of CDN / animation state.
+ const revealItems=[...document.querySelectorAll('.reveal')];
+ revealItems.forEach(el=>{el.style.removeProperty('opacity');el.style.removeProperty('visibility')});
+ // Always dismiss the loader, even if GSAP, CDN, or a tab's animation frame fails.
+ window.setTimeout(hide,2000);
+ const g=window.gsap;
+ if(!g||reduce){
+   window.setTimeout(hide,350);
+ }else{
+   document.body.classList.add('gsap-active');
+   if(window.ScrollTrigger){try{g.registerPlugin(window.ScrollTrigger)}catch(e){}}
+   try{
+     g.timeline({onComplete:hide})
+       .fromTo('.loader-logo',{scale:.9,opacity:.76},{scale:1,opacity:1,duration:.33,ease:'power2.out'})
+       .to('.loader-track i',{scaleX:1,duration:.45,ease:'power2.inOut'},'-=.18')
+       .to('#loader',{yPercent:-10,autoAlpha:0,duration:.4,ease:'power2.inOut'},'+=.06');
+     if(page==='home'){
+       g.fromTo('.hero-content h1',{y:12,opacity:.92},{y:0,opacity:1,duration:.7,ease:'power2.out',clearProps:'transform,opacity'});
+       g.fromTo('.hero-buttons',{y:8,opacity:.92},{y:0,opacity:1,duration:.75,delay:.15,clearProps:'transform,opacity'});
+       const slides=g.utils.toArray('.home-hero .hero-photo');
+       if(slides.length===3){
+         g.set(slides,{opacity:0});g.set(slides[0],{opacity:1});
+         const carousel=g.timeline({repeat:-1,repeatDelay:0,delay:4});
+         for(let i=0;i<3;i++){
+           const next=slides[(i+1)%3],old=slides[i];
+           carousel.to(next,{opacity:1,duration:1.35,ease:'sine.inOut'},i===0?undefined:'+=5.5');
+           carousel.to(old,{opacity:0,duration:1.35,ease:'sine.inOut'},'<');
+         }
+       }
+     }
+   }catch(err){console.warn('Animation enhancement skipped:',err);hide()}
+ }
+ // Intersection-based entrance uses movement only. No hidden state is ever set.
+ if(!reduce&&'IntersectionObserver' in window){
+   const obs=new IntersectionObserver(entries=>{
+     entries.forEach(entry=>{
+       if(!entry.isIntersecting)return;
+       obs.unobserve(entry.target);
+       const el=entry.target;
+       el.classList.add('is-visible');
+       if(g){try{g.fromTo(el,{y:11},{y:0,duration:.58,ease:'power2.out',overwrite:'auto',clearProps:'transform'})}catch(e){}}
+     });
+   },{rootMargin:'0px 0px 50px 0px',threshold:0.03});
+   revealItems.forEach(el=>obs.observe(el));
+ }else{revealItems.forEach(el=>el.classList.add('is-visible'))}
+ const siteHeader=document.getElementById('site-header');
+ const syncHeader=()=>siteHeader?.classList.toggle('scrolled',window.scrollY>35);
+ window.addEventListener('scroll',syncHeader,{passive:true});syncHeader();
+}
+
 renderPage();
 })();
